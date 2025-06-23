@@ -5,7 +5,9 @@ from tokenizers.trainers import BpeTrainer
 from tokenizers.pre_tokenizers import Whitespace
 
 def train_tokenizer():
-        # 初始化 BPE 模型
+    # https://yuanbao.tencent.com/favorites/cfd69845-2349-4d15-8d90-2efcbe6f5524
+    # https://yuanbao.tencent.com/favorites/c25f01a4-c8b9-4c5e-bff0-6aaddb2efce1
+    # 初始化 BPE 模型
     tokenizer = Tokenizer(BPE(unk_token="[UNK]"))
 
     # 使用空格预分词
@@ -22,6 +24,10 @@ def train_tokenizer():
     return tokenizer
 
 def test(tokenizer):
+    vocab = tokenizer.get_vocab()
+    print("词汇表大小:", len(vocab))
+    for token, idx in sorted(vocab.items(), key=lambda x: x[1])[:50]:  # 打印前50个
+        print(f"{idx:5d}: {token}")
     # 编码新文本
     output1 = tokenizer.encode("Deep learning is awesome!")
     output2 = tokenizer.encode("Have you used BERT?")
