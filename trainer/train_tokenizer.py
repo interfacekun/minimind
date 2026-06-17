@@ -23,6 +23,7 @@ def get_texts(data_path):
 
 def train_tokenizer(data_path, tokenizer_dir, vocab_size, special_tokens_num=SPECIAL_TOKENS_NUM):
     tokenizer = Tokenizer(models.BPE())
+    #在分词之前，把文本转换成 UTF‑8 字节级表示，再映射成可学习的 token, 进而支持所有语言 & emoji
     tokenizer.pre_tokenizer = pre_tokenizers.ByteLevel(add_prefix_space=False)
     
     special_tokens_list = [
